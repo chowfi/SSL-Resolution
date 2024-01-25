@@ -141,35 +141,8 @@ dataloader.py - Script for generating multiple transformations of image data in 
 ## Encoder/Autoencoder
 **encoder.py** - houses model definitions for autoencoder, encoder, and decoder as well as functions for training and reconstruction plotting.
 
-**encoder_test.py** - Executable script to train an autoencoder. Saves model as `encoder_test_results/autoencoder_epoch_{epoch}.pth` after every epoch, and final model as `encoder_test_results/final.pth` after training completes. Logs train loss and validation loss as `encoder_test_results/loss.csv` at end of training. Logs reconstruction examples as `encoder_test_results/reconstruction_epoch_{epoch}.png`
-
-**encoder_test.py args:** 
---epochs (int): number of epochs to train (default=10), --latent_dim (int): depth of encoder outputs (default=128), --batch_size(int): batch size for the data loader (default=32), --subset_percentage (float): percentage of data to train/evaluate (default=1.0, must be between 0.0 and 1.0), --loss (str): loss function to use in training (default=binary_crossentropy, can also use "mse")
-
-<ins>Train Autoencoder Example:</ins>
-
-
-```
-python encoder_test.py --epochs=10 --latent_dim=128 --batch_size=32 --subset_percentage=0.1 --loss=binary_crossentropy
-```
-The above code trains an autoencoder for 10 epochs using a batch size of 32 on 10% subset of the original training data with binary crossentropy loss.
-
 ## Classifier
 **classifier.py** - houses model definitions for Classifier and ConvClassifier as well as functions for training and reconstruction plotting
-
-**classifier_test.py** - Executable script to train a classifier. Uses encoder section of a trained autoencoder saved at `encoder_test_results/final.pth`. Saves model as `classifier_test_results/classifier_epoch_{epoch}.pth` after every epoch, and final model as `classifier_test_results/final.pth` after training completes. Logs train loss, validation loss, and validation accuracy as `classifier_test_results/loss.csv` at end of training.
-
-**classifier_test.py args:** 
---dropout (float): dropout percentage (default=0.5, must be between 0.0 and 1.0), embeddings_size (int) height/width of encoder outputs (default=7 for 28x28), --epochs (int): number of epochs to train (default=10), --input_channels (int): depth of encoder outputs/classifier inputs (default=128), --batch_size(int): batch size for the data loader (default=32), --subset_percentage (float): percentage of data to train/evaluate (default=1.0, must be between 0.0 and 1.0), --target_size(int): target height/width of input data (default=28, should be 14 or 28)
-
-<ins>Train Classifier Example:</ins>
-
-
-```
-python classifier_test.py --epochs=10 --embeddings_size=7 --input_channels=128 --batch_size=32 --subset_percentage=0.1 --target_size=28 --dropout=0.5
-```
-
-The above code trains a convolutional classifier for 10 epochs using a batch size of 32 on 10% subset of the original training data. The encoder reduces the 28x28 target size to the embeddings size of 7. Dropout is set to 0.5.
 
 ## Running Experiments
 
