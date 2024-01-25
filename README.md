@@ -195,36 +195,3 @@ On Singularity: `scp -r experiments [netid]@greene.hpc.nyu.edu:[greene-destinati
 
 On greene: `scp -r [netid]@greene.hpc.nyu.edu:[greene-path]/experiments [local-destination-path]`
 
-## Running Experiments on SimSiam
-
-<ins>Train SimSiam</ins>
-
-
-```
-python train_resunet_dualloader.py 
-```
-This script is used to train the simsiam network with the encoder structure as specified in the file base_encoder3.py. It has an LR scheduler implemented to smoothen the learning process, and make sure to change the argument 'version' to the loss function 'D' as 'simplified' or 'original' based on the one you wish to use. The script logs the training results in terms of training loss and validation loss in a csv file.
-
-<ins>Train Classifier with SimSiam Emeddings</ins>
-
-```
-python train_classifier_simsiam_flat.py
-```
-
-This script is used to extract the embeddings from the trained encoder of the simsiam model, force a flattening operation on the embedding such that it may be fed into a flat linear classifier. The classifier is then trained with these flat embeddings and the results of each epoch is logged in a csv file.
-
-**Results:**
-
-All the simsiam results are found under the `experiment_results` folder. The file `run_logs.csv` contains parameters and test accuracy for all runs, while model checkpoints and epochwise loss can be found in the models folder under its run_id. This structure is outlined below
-
-
-```
-├── experiment_results
-│   ├── run_logs.csv
-│   ├── models
-│   │   ├── {run_id}
-│   │   │   ├──classifier_{epoch}.pth
-│   │   │   ├──{self_supervized_model}_{epoch}.pth
-
- 
-```
