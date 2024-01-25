@@ -140,6 +140,7 @@ dataloader.py - Script for generating multiple transformations of image data in 
 
 ## Encoder/Autoencoder
 **encoder.py** - houses model definitions for autoencoder, encoder, and decoder as well as functions for training and reconstruction plotting.
+**simsiam.py** - houses model definitions for simsiam
 
 ## Classifier
 **classifier.py** - houses model definitions for Classifier and ConvClassifier as well as functions for training and reconstruction plotting
@@ -169,7 +170,7 @@ python experiment.py --epochs=10 --latent_shape flat --latent_dim 256  --batch_s
 
 **`--encoder_image_shape (int int)`**:  shape of images used to train the self-supervised model
 
-**`--self_supervised_model ("autoencoder" or "simsiam")`**: (**no simsiam yet**) self-supervised architecture to train encoder
+**`--self_supervised_model ("autoencoder" or "simsiam")`**: self-supervised architecture to train encoder
 
 **`--classifier_image_shape (int int)`**: shape of input images for classifier training
 
@@ -177,7 +178,7 @@ python experiment.py --epochs=10 --latent_shape flat --latent_dim 256  --batch_s
 
 **Results:**
 
-All the autoencoder results are found under the `experiments` folder. The file `run_logs.csv` contains parameters and test accuracy for all runs, while model checkpoints and epochwise loss can be found in the models folder under its run_id. This structure is outlined below:
+All the results are found under the `experiments` folder. The file `run_logs.csv` contains parameters and test accuracy for all runs, while model checkpoints and epochwise loss can be found in the models folder under its run_id. This structure is outlined below:
 ```
 ├── experiments
 │   ├── run_logs.csv
