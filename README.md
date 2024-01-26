@@ -140,10 +140,10 @@ dataloader.py - Script for generating multiple transformations of image data in 
 
 ## Encoder/Autoencoder
 **encoder.py** - houses model definitions for autoencoder, encoder, and decoder as well as functions for training and reconstruction plotting.
-**simsiam.py** - houses model definitions for simsiam
+**simsiam.py** - houses model definitions for SimSiam (the projector, predictor and same encoder network as the autoencoder).
 
 ## Classifier
-**classifier.py** - houses model definitions for Classifier and ConvClassifier as well as functions for training and reconstruction plotting
+**classifier.py** - houses model definitions for Classifier and ConvClassifier as well as functions for training and reconstruction plotting.
 
 ## Running Experiments
 
@@ -181,13 +181,21 @@ python experiment.py --epochs=10 --latent_shape flat --latent_dim 256  --batch_s
 All the results are found under the `experiments` folder. The file `run_logs.csv` contains parameters and test accuracy for all runs, while model checkpoints and epochwise loss can be found in the models folder under its run_id. This structure is outlined below:
 ```
 ├── experiments
-│   ├── run_logs.csv
-│   ├── models
-│   │   ├── {run_id}
-│   │   │   ├──classifier_{epoch}.pth
-│   │   │   ├──classifier_loss.csv
-│   │   │   ├──{self_supervized_model}_{epoch}.pth
-│   │   │   ├──{self_supervized_model}_loss.csv
+|   ├── Autoencoder
+│   │   ├── run_logs.csv
+│   |   ├── model
+│   │   |   ├── {run_id}
+│   │   |   │   ├──classifier_{epoch}.pth
+│   │   |   │   ├──classifier_loss.csv
+│   │   │   |   ├──{self_supervized_model}_{epoch}.pth
+│   │   │   |   ├──{self_supervized_model}_loss.csv
+|   ├── SimSiam
+|   |   ├── run_logs.csv
+|   │   ├── model
+|   │   │   ├── {run_id}
+|   │   │   │   ├──classifier_{epoch}.pth
+|   │   │   │   ├──{self_supervized_model}_{epoch}.pth
+
 ```
 
 **Retrieving All Results from Cluster:**
