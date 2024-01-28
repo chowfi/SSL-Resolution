@@ -1,3 +1,5 @@
+This is a group project developed by a team of four individuals.
+
 ## Research Question:
 Does spatial resolution (i.e. meters per pixel) matter for self-supervised learning methods for satellite imagery? 
 
