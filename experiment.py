@@ -103,10 +103,10 @@ def main(args):
             autoencoder = FlatAutoencoder(args.encoder_image_shape[0],args.latent_dim,4)
         train_autoencoder(autoencoder,train_loader,val_loader,args.epochs,loss=args.encoder_loss, run_id=args.run_id)
         torch.save(autoencoder,f'experiments/Autoencoder/model/{args.run_id}/autoencoder_final.pth')
-    if args.self_supervised_model=='simsiam':
+    elif args.self_supervised_model=='simsiam':
         # TODO: incoporate conv autoencoder
         autoencoder = FlatAutoencoder(args.encoder_image_shape[0],args.latent_dim,4)
-        simsiam = train_simsiam(autoencoder, train_loader, val_loader, num_epochs=args.epochs, run_id=args.run_id)
+        train_simsiam(autoencoder, train_loader, val_loader, num_epochs=args.epochs, run_id=args.run_id)
         torch.save(simsiam, f'experiments/SimSiam/model/{args.run_id}/SimSiam_final.pth')
 
 
@@ -135,12 +135,8 @@ def main(args):
         classifier = Classifier(input_dim=args.latent_dim,dropout_prob=args.dropout)
     
     classifier.to(device)
-    if args.self_supervised_model=='autoencoder':
-        train_classifier(autoencoder,classifier,train_loader,val_loader,args.epochs,run_id=args.run_id)
-        torch.save(classifier,f"experiments/Autoencoder/model/{args.run_id}/classifier_final.pth")
-    if args.self_supervised_model=='simsiam':
-        train_classifier(simsiam,classifier,train_loader,val_loader,args.epochs,run_id=args.run_id)
-        torch.save(classifier,f"experiments/SimSiam/model/{args.run_id}/classifier_final.pth")
+    train_classifier(autoencoder,classifier,train_loader,val_loader,args.epochs,run_id=args.run_id)
+    torch.save(classifier,f"experiments/{args.self_supervised_model}/model/{args.run_id}/classifier_final.pth")
 
     # eval classifier on test set
     print(f"Creating classifier test DataLoader: batch size = {args.batch_size}, target size = {args.classifier_image_shape}, subset % = {round(args.subset_percentage*100,2)}")
@@ -148,10 +144,7 @@ def main(args):
                                    target_size=args.classifier_image_shape,
                                    subset_percentage=args.subset_percentage)
 
-    if args.self_supervised_model=='autoencoder':
-        test_accuracy = evaluate_accuracy(autoencoder,classifier,test_loader)
-    if args.self_supervised_model=='simsiam':
-        test_accuracy = evaluate_accuracy(simsiam, classifier,test_loader)
+    test_accuracy = evaluate_accuracy(autoencoder,classifier,test_loader)
 
     print(test_accuracy)
 
