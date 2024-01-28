@@ -1,7 +1,7 @@
 This is a group project developed by a team of four individuals.
 
 ## Research Question:
-Does spatial resolution (i.e. meters per pixel) matter for self-supervised learning methods for satellite imagery? 
+Does spatial resolution (i.e. meters per pixel) matter for self-supervised learning methods for multispectral imagery? 
 
 ## Dataset
 National Agriculture Imagery Program (NAIP)
