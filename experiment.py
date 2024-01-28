@@ -49,17 +49,21 @@ def main(args):
     # create dirs for logging if not present
     if 'experiments' not in os.listdir():
         os.makedirs('experiments')
-    if 'models' not in os.listdir('experiments'):
-        os.makedirs('experiments/model')
+    self_supervised_model_path = os.path.join('experiments', args.self_supervised_model)
+    if not os.path.exists(self_supervised_model_path):
+        os.makedirs(self_supervised_model_path)
+    model_dir = os.path.join(self_supervised_model_path, 'model')
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
 
     
     # see if run with same id already exists
     response=None
-    if str(args.run_id) in os.listdir('experiments/model/'):
+    if str(args.run_id) in os.listdir('experiments/{args.self_supervised_model}/model/'):
         
         # if default (no manual input), just increment
         if args.run_id == 0:
-            while str(args.run_id) in os.listdir('experiments/model/'):
+            while str(args.run_id) in os.listdir('experiments/{args.self_supervised_model}/model/'):
                 args.run_id += 1
         
         # if named run, prompt user for inputs
@@ -72,7 +76,7 @@ def main(args):
                 quit()
             print("overwriting...")
 
-    if response==None: os.makedirs(f'experiments/model/{args.run_id}')
+    if response==None: os.makedirs(f'experiments/{args.self_supervised_model}/model/{args.run_id}')
 
     # data paths
     data_dir = "/scratch/fc1132/capstone_data"
