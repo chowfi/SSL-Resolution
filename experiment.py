@@ -59,11 +59,11 @@ def main(args):
     
     # see if run with same id already exists
     response=None
-    if str(args.run_id) in os.listdir('experiments/{args.self_supervised_model}/model/'):
+    if str(args.run_id) in os.listdir(f'experiments/{args.self_supervised_model}/model/'):
         
         # if default (no manual input), just increment
         if args.run_id == 0:
-            while str(args.run_id) in os.listdir('experiments/{args.self_supervised_model}/model/'):
+            while str(args.run_id) in os.listdir(f'experiments/{args.self_supervised_model}/model/'):
                 args.run_id += 1
         
         # if named run, prompt user for inputs
@@ -111,7 +111,7 @@ def main(args):
         # TODO: incoporate conv autoencoder
         autoencoder = FlatAutoencoder(args.encoder_image_shape[0],args.latent_dim,4)
         train_simsiam(autoencoder, train_loader, val_loader, num_epochs=args.epochs, run_id=args.run_id)
-        torch.save(simsiam, f'experiments/SimSiam/model/{args.run_id}/SimSiam_final.pth')
+        torch.save(autoencoder, f'experiments/SimSiam/model/{args.run_id}/SimSiam_final.pth')
 
 
     # CLASSIFICATION
@@ -154,8 +154,8 @@ def main(args):
 
     # df to hold outputs
     df = pd.DataFrame(columns=['Timestamp','Run ID/Name','Epochs','Batch Size','Subset %','Latent Dimension Depth','Latent Dimension Output Shape','Encoder Training Dimensions','Self-Supervised Model','Autoencoder Loss Function','Classifier Training Dimensions','Classifier Test Accuracy'])
-    if "run_logs.csv" not in os.listdir("experiments/{args.self_supervised_model}/"):    
-        df.to_csv("experiments/{args.self_supervised_model}/run_logs.csv",index=False)
+    if "run_logs.csv" not in os.listdir(f"experiments/{args.self_supervised_model}/"):    
+        df.to_csv(f"experiments/{args.self_supervised_model}/run_logs.csv",index=False)
     
     # conditional for encoder loss function
     if args.self_supervised_model!='autoencoder':
@@ -167,7 +167,7 @@ def main(args):
     # add entry to file
     entry = [datetime.datetime.fromtimestamp(time.time()).strftime('%c'),args.run_id,args.epochs,args.batch_size,args.subset_percentage,args.latent_dim,args.latent_shape,args.encoder_image_shape,args.self_supervised_model,encoder_loss,args.classifier_image_shape,round(test_accuracy,2)]
     df.loc[len(df.index)] = entry
-    df.to_csv("experiments/{args.self_supervised_model}/run_logs.csv",index=False,header=False,mode='a')
+    df.to_csv(f"experiments/{args.self_supervised_model}/run_logs.csv",index=False,header=False,mode='a')
 
     return
 
