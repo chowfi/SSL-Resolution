@@ -140,6 +140,7 @@ dataloader.py - Script for generating multiple transformations of image data in 
 
 ## Encoder/Autoencoder
 **encoder.py** - houses model definitions for autoencoder, encoder, and decoder as well as functions for training and reconstruction plotting.
+
 **simsiam.py** - houses model definitions for SimSiam (the projector, predictor and same encoder network as the autoencoder).
 
 ## Classifier
