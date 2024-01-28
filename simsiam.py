@@ -234,7 +234,6 @@ def train_simsiam(autoencoder, train_loader,val_loader, num_epochs=10, run_id=No
             'val_loss': average_validation_loss
         }, f'checkpoint_folder_lr_scheduler_14x14/simsiam_model_epoch_{epoch + 1}.pth')
     
-    return simsiam_model
-    
+    return 
 
 
