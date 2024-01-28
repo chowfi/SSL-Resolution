@@ -83,9 +83,9 @@ def main(args):
     X_path_train = f"{data_dir}/X_train_split.csv"
     y_path_train = f"{data_dir}/y_train_split.csv"
     X_path_val = f"{data_dir}/X_val_split.csv" 
-    y_path_val = f"{data_dir}//y_val_split.csv" 
-    X_path_test = f"{data_dir}//X_test_sat6.csv"
-    y_path_test = f"{data_dir}//y_test_sat6.csv"
+    y_path_val = f"{data_dir}/y_val_split.csv" 
+    X_path_test = f"{data_dir}/X_test_sat6.csv"
+    y_path_test = f"{data_dir}/y_test_sat6.csv"
 
     # SELF-SUPERVISED
     # train/val data for encoder/decoder
